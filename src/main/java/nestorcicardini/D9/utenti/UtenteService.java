@@ -1,13 +1,13 @@
 package nestorcicardini.D9.utenti;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import nestorcicardini.D9.Exceptions.BadRequestException;
 import nestorcicardini.D9.auth.payloads.AuthUtentePayload;
+import nestorcicardini.D9.exceptions.BadRequestException;
+import nestorcicardini.D9.exceptions.NotFoundException;
 
 @Service
 public class UtenteService {
@@ -36,7 +36,8 @@ public class UtenteService {
 		return utenteRepo.findAll();
 	}
 
-	public Optional<Utente> findByEmail(String email) {
-		return utenteRepo.findByEmail(email);
+	public Utente findByEmail(String email) throws NotFoundException {
+		return utenteRepo.findByEmail(email)
+				.orElseThrow(() -> new NotFoundException("Email non trovata"));
 	}
 }
