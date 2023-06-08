@@ -2,7 +2,6 @@ package nestorcicardini.D9.utenti;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,9 +21,9 @@ public class UtenteController {
 		return utenteService.findAll();
 	}
 
-	@GetMapping("{id}")
-	public Optional<Utente> getUtentiById(@PathVariable UUID id) {
-		return utenteService.findById(id);
+	@GetMapping("{email}")
+	public Optional<Utente> GetByEmail(@PathVariable String email) {
+		return utenteService.findByEmail(email);
 	}
 
 }

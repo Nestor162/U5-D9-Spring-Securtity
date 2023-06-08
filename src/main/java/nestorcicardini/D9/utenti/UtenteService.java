@@ -2,7 +2,6 @@ package nestorcicardini.D9.utenti;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,7 +36,7 @@ public class UtenteService {
 		return utenteRepo.findAll();
 	}
 
-	public Optional<Utente> findById(UUID id) {
-		return utenteRepo.findById(id);
+	public Optional<Utente> findByEmail(String email) {
+		return utenteRepo.findByEmail(email);
 	}
 }

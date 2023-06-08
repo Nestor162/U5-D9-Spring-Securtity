@@ -20,7 +20,7 @@ public class AuthController {
 	UtenteService utenteService;
 
 	@PostMapping("/register")
-	public ResponseEntity<Utente> userLogin(
+	public ResponseEntity<Utente> userRegister(
 			@RequestBody @Validated AuthUtentePayload payload) {
 
 		Utente utenteCreato = utenteService.create(payload);
@@ -29,7 +29,12 @@ public class AuthController {
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<AuthUtentePayload> userRegister() {
+	public ResponseEntity<AuthUtentePayload> userLogin(
+			AuthUtentePayload payload) {
+		// Verificare credenziali ottenute da payload:
+		// 1- Email, controlliamo che l'email esista su db
+		utenteService.findByEmail(payload.getEmail());
+
 		return null;
 
 	}
