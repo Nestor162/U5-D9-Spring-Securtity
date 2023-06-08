@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import nestorcicardini.D9.exceptions.InvalidCredentialsException;
+import nestorcicardini.D9.exceptions.InvalidTokenException;
 import nestorcicardini.D9.exceptions.NotFoundException;
 
 @RestControllerAdvice
@@ -27,10 +28,19 @@ public class GlobalExceptionHandler {
 				.body(ex.getMessage());
 	}
 
+	@ExceptionHandler(InvalidTokenException.class)
+	public ResponseEntity<String> HandleInvalidTokenException(
+			InvalidTokenException ex) {
+
+		return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+				.body(ex.getMessage());
+	}
+
 	@ExceptionHandler(Exception.class)
 	public ResponseEntity<String> handleException(Exception ex) {
 
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
 				.body("Errore generico sul server...");
 	}
+
 }
